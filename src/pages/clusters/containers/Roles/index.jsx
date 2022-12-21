@@ -26,6 +26,7 @@ import { getLocalTime } from 'utils'
 import { ICON_TYPES } from 'utils/constants'
 
 import RoleStore from 'stores/role'
+import { toJS } from 'mobx'
 
 @withList({
   store: new RoleStore('clusterroles'),
@@ -37,11 +38,13 @@ export default class ClusterRoles extends React.Component {
     this.props.store.fetchRoleTemplates(this.props.match.params)
   }
 
-  showAction = record =>
-    !globals.config.presetClusterRoles.includes(record.name)
+  // showAction = record =>
+  //   !globals.config.presetClusterRoles.includes(record.name)
+
+  showAction = record => record.name != null
 
   get itemActions() {
-    const { trigger, name, routing } = this.props
+    const { trigger, store, name, module, routing } = this.props
     return [
       {
         key: 'edit',
@@ -52,6 +55,20 @@ export default class ClusterRoles extends React.Component {
         onClick: item =>
           trigger('resource.baseinfo.edit', {
             detail: item,
+            success: routing.query,
+          }),
+      },
+      {
+        key: 'editRole',
+        icon: 'pen',
+        text: t('EDIT_PERMISSIONS'),
+        action: 'edit',
+        show: this.showAction,
+        onClick: item =>
+          trigger('role.edit', {
+            module,
+            detail: item,
+            roleTemplates: toJS(store.roleTemplates.data),
             success: routing.query,
           }),
       },
@@ -76,7 +93,7 @@ export default class ClusterRoles extends React.Component {
     const { tableProps } = this.props
     return {
       ...tableProps.tableActions,
-      onCreate: undefined,
+      onCreate: this.showCreate,
       selectActions: [],
     }
   }
@@ -118,6 +135,15 @@ export default class ClusterRoles extends React.Component {
 
   get emptyProps() {
     return { desc: t('CLUSTER_ROLE_DESC') }
+  }
+
+  showCreate = () => {
+    const { store, trigger, getData } = this.props
+    return trigger('role.create', {
+      title: t('CREATE_PLATFORM_ROLE'),
+      roleTemplates: toJS(store.roleTemplates.data),
+      success: getData,
+    })
   }
 
   render() {

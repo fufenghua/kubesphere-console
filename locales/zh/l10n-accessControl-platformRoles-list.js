@@ -56,5 +56,31 @@ module.exports = {
   // List > Create > Edit Permissions > Platform Settings
   PERMIGROUP_PLATFORM_SETTINGS: '平台设置',
   PERMISSION_PLATFORM_SETTINGS_MANAGEMENT: '平台设置管理',
-  PERMISSION_PLATFORM_SETTINGS_MANAGEMENT_DESC: '查看和编辑 KubeSphere平台的设置。'
+  PERMISSION_PLATFORM_SETTINGS_MANAGEMENT_DESC: '查看和编辑 KubeSphere平台的设置。',
+  // List > Create > Edit Permissions > Custom Settings
+  // PERMIGROUP_CUSTOM_SETTINGS: '自定义设置',
+  // PERMISSION_SLB_SETTINGS_MANAGEMENT: '允许操作SLB相关设置',
+  // PERMISSION_SLB_SETTINGS_MANAGEMENT_DESC: '允许操作Slb相关设置，包括deployment，service等页面的外网访问设置',
+  // List > Create > Edit Permissions > Custom Settings
+  PERMIGROUP_APPLICATION_WORKLOAD: '应用负载',
+  PERMISSION_APP_WORKLOADS_MANAGE: '允许操作工作负载相关设置',
+  PERMISSION_APP_WORKLOADS_MANAGE_DESC: '允许操作工作负载相关设置',
+  PERMISSION_APP_WORKLOADS_VIEW: '允许查看工作负载',
+  PERMISSION_APP_WORKLOADS_VIEW_DESC: '允许查看工作负载',
+  PERMISSION_APP_JOBS_MANAGE: '允许操作任务相关设置',
+  PERMISSION_APP_JOBS_MANAGE_DESC: '允许操作任务相关设置',
+  PERMISSION_APP_JOBS_VIEW: '允许查看任务',
+  PERMISSION_APP_JOBS_VIEW_DESC: '允许查看任务',
+  PERMISSION_APP_PODS_MANAGE: '允许操作容器相关设置',
+  PERMISSION_APP_PODS_MANAGE_DESC: '允许操作容器相关设置',
+  PERMISSION_APP_PODS_VIEW: '允许查看容器',
+  PERMISSION_APP_PODS_VIEW_DESC: '允许查看容器',
+  PERMISSION_APP_SERVICES_MANAGE: '允许操作服务相关设置',
+  PERMISSION_APP_SERVICES_MANAGE_DESC: '允许操作服务相关设置',
+  PERMISSION_APP_SERVICES_VIEW: '允许查看服务',
+  PERMISSION_APP_SERVICES_VIEW_DESC: '允许查看服务',
+  PERMISSION_APP_ROUTES_MANAGE: '允许操作应用路由相关设置',
+  PERMISSION_APP_ROUTES_MANAGE_DESC: '允许操作应用路由相关设置',
+  PERMISSION_APP_ROUTES_VIEW: '允许查看应用路由',
+  PERMISSION_APP_ROUTES_VIEW_DESC: '允许查看应用路由',
 };

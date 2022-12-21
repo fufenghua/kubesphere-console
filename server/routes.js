@@ -23,7 +23,7 @@ const bodyParser = require('koa-bodyparser')
 const proxy = require('./middlewares/proxy')
 const checkToken = require('./middlewares/checkToken')
 const checkIfExist = require('./middlewares/checkIfExist')
-
+const checkOutService = require('./middlewares/checkOutService')
 const {
   k8sResourceProxy,
   devopsWebhookProxy,
@@ -67,7 +67,7 @@ router
   .post('/dockerhub/(.*)', parseBody, handleDockerhubProxy)
   .post('/harbor/(.*)', parseBody, handleHarborProxy)
   .get('/blank_md', renderMarkdown)
-
+  .put('/api/v1/namespaces/(.*)/services/(.*)', checkOutService)
   .all('/(k)?api(s)?/(.*)', checkToken, checkIfExist)
   .use(proxy('/(k)?api(s)?/(.*)', k8sResourceProxy))
 

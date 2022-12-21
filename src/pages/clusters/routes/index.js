@@ -163,6 +163,8 @@ export default [
             path: `${PATH}/secrets`,
             component: Secrets,
             exact: true,
+            // authModule: 'Application Workload',
+            // authRule: 'app-jobs',
           },
           {
             path: `${PATH}/configmaps`,

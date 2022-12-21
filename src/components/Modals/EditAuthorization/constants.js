@@ -35,6 +35,14 @@ export const ROLE_MODULES = {
       name: 'Platform Settings',
       icon: 'cogwheel',
     },
+    {
+      name: 'Application Workload',
+      icon: 'cogwheel',
+    },
+    // {
+    //   name: 'Custom Settings',
+    //   icon: 'cogwheel',
+    // },
   ],
   workspaceroles: [
     {

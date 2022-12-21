@@ -40,6 +40,15 @@ export default class Services extends React.Component {
 
   get itemActions() {
     const { trigger, name } = this.props
+    // const slbSettings =
+    //   globals.app.hasPermission({
+    //     module: 'roles',
+    //     action: 'slb-settings',
+    //   }) ||
+    //   globals.app.hasPermission({
+    //     module: 'platform-settings',
+    //     action: 'manage',
+    //   })
     return [
       {
         key: 'edit',

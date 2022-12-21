@@ -131,6 +131,8 @@ client:
           children:
             - name: workloads
               title: WORKLOAD_PL
+#               authModule: Application Workload
+#               authRule: app-workloads
               tabs:
                 - { name: deployments, title: DEPLOYMENT_PL }
                 - { name: statefulsets, title: STATEFULSET_PL }
@@ -549,7 +551,7 @@ client:
   # preset infos
   presetUsers: [admin, sonarqube]
   presetGlobalRoles:
-    [platform-admin, platform-regular, workspaces-manager, users-manager]
+    [platform-admin, platform-regular, workspaces-manager, users-manager, platform-normal]
   presetClusterRoles: [cluster-admin, cluster-viewer]
   presetWorkspaceRoles: [admin, regular, viewer, self-provisioner]
   presetDevOpsRoles: [admin, operator, viewer]

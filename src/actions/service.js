@@ -34,6 +34,7 @@ import FORM_TEMPLATES from 'utils/form.templates'
 import FORM_STEPS from 'configs/steps/services'
 
 import ServiceMonitorStore from 'stores/monitoring/service.monitor'
+import cookie from 'utils/cookie'
 
 export default {
   'service.create': {
@@ -133,11 +134,28 @@ export default {
     on({ store, detail, success, ...props }) {
       const modal = Modal.open({
         onOk: newObject => {
-          store.update(detail, newObject).then(() => {
-            Modal.close(modal)
-            Notify.success({ content: t('UPDATE_SUCCESSFUL') })
-            success && success()
-          })
+          if (
+            newObject.spec.type === 'NodePort' ||
+            newObject.spec.type === 'LoadBalancer'
+          ) {
+            const can = globals.app.hasPermission({
+              module: 'app-services',
+              action: 'manage',
+            })
+            cookie('service-modify', can)
+            store.update(detail, newObject).then(() => {
+              Modal.close(modal)
+              Notify.success({ content: t('UPDATE_SUCCESSFUL') })
+              success && success()
+            })
+          } else {
+            cookie('service-modify', 'true')
+            store.update(detail, newObject).then(() => {
+              Modal.close(modal)
+              Notify.success({ content: t('UPDATE_SUCCESSFUL') })
+              success && success()
+            })
+          }
         },
         modal: EditGatewayModal,
         detail,
