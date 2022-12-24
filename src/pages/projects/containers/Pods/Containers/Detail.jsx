@@ -176,23 +176,28 @@ export default class ContainerDetail extends React.Component {
 
   handleOpenTerminal = () => {
     const {
-      cluster,
+      // cluster,
       namespace,
       podName,
       containerName,
     } = this.props.match.params
-
-    const terminalUrl = `/terminal/cluster/${cluster}/projects/${namespace}/pods/${podName}/containers/${containerName}`
-    window.open(
-      terminalUrl,
-      `Connecting ${containerName}`,
-      createCenterWindowOpt({
-        width: 1200,
-        height: 800,
-        scrollbars: 1,
-        resizable: 1,
+    request
+      .get(
+        `"api/v1/klusters/default/namespaces/kubesphere-system/configmaps/aliyun-terminal"`
+      )
+      .then(result => {
+        const terminalUrl = `https://ecs-workbench.aliyun.com/single/ack/${result.data.region}/${result.data.askClusterId}/${namespace}/${podName}/${containerName}`
+        window.open(
+          terminalUrl,
+          `Connecting ${containerName}`,
+          createCenterWindowOpt({
+            width: 1200,
+            height: 800,
+            scrollbars: 1,
+            resizable: 1,
+          })
+        )
       })
-    )
   }
 
   render() {

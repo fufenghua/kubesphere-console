@@ -110,7 +110,7 @@ export default class KubeTools extends React.Component {
             description: t('VIEW_KUBE_CONFIG'),
             title: 'kubeconfig',
             link: '/kubeConfig',
-            hidden: !globals.config.enableKubeConfig,
+            hidden: !globals.app.isPlatformAdmin,
             action: 'toolbox.kubeconfig',
           },
         ],

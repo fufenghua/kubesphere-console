@@ -142,19 +142,25 @@ export default {
               module: 'app-services',
               action: 'manage',
             })
-            cookie('service-modify', can)
-            store.update(detail, newObject).then(() => {
-              Modal.close(modal)
-              Notify.success({ content: t('UPDATE_SUCCESSFUL') })
-              success && success()
-            })
+            store
+              .updateWithOptions(detail, newObject, {
+                headers: { 'service-modify': can },
+              })
+              .then(() => {
+                Modal.close(modal)
+                Notify.success({ content: t('UPDATE_SUCCESSFUL') })
+                success && success()
+              })
           } else {
-            cookie('service-modify', 'true')
-            store.update(detail, newObject).then(() => {
-              Modal.close(modal)
-              Notify.success({ content: t('UPDATE_SUCCESSFUL') })
-              success && success()
-            })
+            store
+              .updateWithOptions(detail, newObject, {
+                headers: { 'service-modify': true },
+              })
+              .then(() => {
+                Modal.close(modal)
+                Notify.success({ content: t('UPDATE_SUCCESSFUL') })
+                success && success()
+              })
           }
         },
         modal: EditGatewayModal,

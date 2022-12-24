@@ -194,7 +194,6 @@ export default class BaseStore {
   @action
   async fetchDetail(params) {
     this.isLoading = true
-
     const result = await request.get(this.getDetailUrl(params))
     const detail = { ...params, ...this.mapper(result) }
 
@@ -252,6 +251,18 @@ export default class BaseStore {
       set(newObject, 'metadata.resourceVersion', resourceVersion)
     }
     return this.submitting(request.put(this.getDetailUrl(params), newObject))
+  }
+
+  @action
+  async updateWithOptions(params, newObject, options) {
+    const result = await request.get(this.getDetailUrl(params))
+    const resourceVersion = get(result, 'metadata.resourceVersion')
+    if (resourceVersion) {
+      set(newObject, 'metadata.resourceVersion', resourceVersion)
+    }
+    return this.submitting(
+      request.put(this.getDetailUrl(params), newObject, options)
+    )
   }
 
   @action

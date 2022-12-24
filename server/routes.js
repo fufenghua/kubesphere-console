@@ -67,8 +67,7 @@ router
   .post('/dockerhub/(.*)', parseBody, handleDockerhubProxy)
   .post('/harbor/(.*)', parseBody, handleHarborProxy)
   .get('/blank_md', renderMarkdown)
-  .put('/api/v1/namespaces/(.*)/services/(.*)', checkOutService)
-  .all('/(k)?api(s)?/(.*)', checkToken, checkIfExist)
+  .all('/(k)?api(s)?/(.*)', checkToken, checkIfExist, checkOutService)
   .use(proxy('/(k)?api(s)?/(.*)', k8sResourceProxy))
 
   .get('/sample/:app', parseBody, handleSampleData)

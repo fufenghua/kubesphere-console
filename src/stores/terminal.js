@@ -117,10 +117,17 @@ export default class TerminalStore {
 
   @action
   async fetchKubeConfig(params) {
+    const can =
+      globals.app.hasPermission({
+        module: 'kubeconfig',
+        action: 'view',
+      }) || globals.app.isPlatformAdmin
     const result = await request.get(
       `kapis/resources.kubesphere.io/v1alpha2${this.getClusterPath(
         params
-      )}/users/${this.username}/kubeconfig`
+      )}/users/${this.username}/kubeconfig`,
+      {},
+      { headers: { 'kubeconfig-view': can } }
     )
     this.kubeconfig = result
   }
