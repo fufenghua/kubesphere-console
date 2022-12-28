@@ -30,6 +30,7 @@ import ClusterStore from 'stores/cluster'
 import { CLUSTER_PROVIDER_ICON } from 'utils/constants'
 import { observable } from 'mobx'
 import styles from './index.scss'
+import { createCenterWindowOpt } from '../../../utils/dom'
 
 @fullScreen
 @observer
@@ -71,7 +72,26 @@ export default class KubeCtlModal extends React.Component {
     }
 
     if (!globals.app.isMultiCluster) {
-      this.getKubeWebUrl()
+      await this.getKubeWebUrl()
+      const { namespace, pod, container } = this.store.kubectl
+      request
+        .get(
+          `api/v1/klusters/default/namespaces/kubesphere-system/configmaps/aliyun-terminal`
+        )
+        .then(result => {
+          const terminalUrl = `https://ecs-workbench.aliyun.com/single/ack/${result.data.region}/${result.data.askClusterId}/${namespace}/${pod}/${container}`
+          window.open(
+            terminalUrl,
+            `Connecting ${container}`,
+            createCenterWindowOpt({
+              width: 1200,
+              height: 800,
+              scrollbars: 1,
+              resizable: 1,
+            })
+          )
+        })
+      this.props.onCancel()
       return
     }
 
